@@ -3,11 +3,13 @@ package com.fomacionbdi.microservicios.app.usuarios.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fomacionbdi.microservicios.app.usuarios.models.entity.Alumno;
 import com.fomacionbdi.microservicios.app.usuarios.models.entity.RolEntity;
 import com.fomacionbdi.microservicios.app.usuarios.models.entity.UsuarioEntity;
 import com.fomacionbdi.microservicios.app.usuarios.services.IRolesServices;
 import com.fomacionbdi.microservicios.app.usuarios.services.IUsuariosService;
 
 @RestController
+@CrossOrigin (origins = {"http://localhost:4200"})
+
 @RequestMapping("/api")
 
 public class IndexController {
@@ -111,5 +116,17 @@ public class IndexController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(us2);
 		
 	}
+	
+	
+	@GetMapping("/listar-uno/{id}")
+	public ResponseEntity<?> ver(@PathVariable Long id){
+		Optional<UsuarioEntity> o = Optional.ofNullable(usuariosServices.listarUno(id));
+		if(o.isEmpty()) {
+		 return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(o.get());
+		
+	}
+	
 
 }

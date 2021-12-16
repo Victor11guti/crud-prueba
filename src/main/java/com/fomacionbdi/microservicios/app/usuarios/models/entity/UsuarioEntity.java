@@ -29,7 +29,7 @@ public class UsuarioEntity implements Serializable {
 	private RolEntity rol;
 	
 	
-	private char Status;
+	private char status;
 
 	public UsuarioEntity () {}
 	public UsuarioEntity(Long id, String name, RolEntity rol, char status) {
@@ -37,7 +37,7 @@ public class UsuarioEntity implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.rol = rol;
-		Status = status;
+		status = status;
 	}
 
 
@@ -72,12 +72,12 @@ public class UsuarioEntity implements Serializable {
 
 
 	public char getStatus() {
-		return Status;
+		return status;
 	}
 
 
 	public void setStatus(char status) {
-		Status = status;
+		status = status;
 	}
 	
 	private static final long serialVersionUID = 1L;
